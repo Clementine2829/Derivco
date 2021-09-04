@@ -1,0 +1,26 @@
+{
+  "name": "derivco",
+  "version": "1.0.0",
+  "description": "Graduate Assessment: Good match ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clementine2829/Derivco.git"
+  },
+  "author": "Clementine Mamogale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Clementine2829/Derivco/issues"
+  },
+  "homepage": "https://github.com/Clementine2829/Derivco#readme",
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

@@ -1,41 +1,6 @@
-<!doctype html>
-<html>
-<head>
-	<title>Graduate Assessment: Good Match</title>
-	<!-- JQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="js/jquery-3.4.1.js" type="text/javascript"></script>
-</head>
-<body>
-	<div>
-		<div>
-			<label>Name 1:</label>
-			<span id="err1" style="color: red"> * </span><br>
-			<input type="text" onblur='validate_data($("#name1").val(), $("#err1"))' id="name1"><br>
-		</div>
-		<div>
-			<label>Name 2:</label>
-			<span id="err2" style="color: red"> * </span><br>
-			<input type="text" onblur='validate_data($("#name2").val(), $("#err2"))' id="name2">
-		</div>
-		<p id="result1"></p>
-		<button id="match_calc_btn">Calculate</button>
-	</div>
-</body>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#match_calc_btn").click(function(){
-			calc_names();
-		})
-	});
 	var FINAL_RESULTS = 0;
-	function calc_names(){
-		//convert these strings to array of chars
-		let name1 = validate_data($("#name1").val(), $("#err1")); 
-		let name2 = validate_data($("#name2").val(), $("#err2"));
-			
+	function calc_names(name1, name2){
 		if(name1 == "" || name2 == "") return;
-
 		name1 = name1.split(""); 
 		name2 = name2.split("");
 		let text = ("matches").split("");
@@ -68,12 +33,10 @@
 		$("#result1").html(result);
 	}
 	function calc_numbers(arr){
-
 		let array = arr.toString().split(',');
 		for(let i = 0; i < array.length; i++){
 			arr[i] = parseInt(array[i]);
 		}
-
 		//Base case of the iteration
 		console.log(arr);
 		if(arr.length < 3){
@@ -156,7 +119,5 @@
 		}else{
 			err.html(" * ");
 			return text;
+		}
 	}
-	}
-</script>
-</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="=viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie-edge" />
+
+	<title>Graduate Assessment: Good Match</title>
+	<!-- JQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+	<div id="container">
+		<div>
+			<h2>Graduate Assessment: Good Match</h2>
+			<h5>Main program 1 with no file upload</h5>
+			<p>
+				<a href="main1.html">Main 1</a> |
+				<a href="main2.html">Main 2</a>
+			</p>
+		</div>
+		<div>
+			<div>
+				<label>Name 1:</label>
+				<span id="err1" style="color: red"> * </span><br>
+				<input type="text" onblur='validate_data($("#name1").val(), $("#err1"))' id="name1"><br>
+			</div>
+			<div>
+				<label>Name 2:</label>
+				<span id="err2" style="color: red"> * </span><br>
+				<input type="text" onblur='validate_data($("#name2").val(), $("#err2"))' id="name2">
+			</div>
+			<p id="result1"></p>
+			<button id="match_calc_btn">Calculate</button>
+		</div>
+	</div>
+	<script src="js/calculate.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#match_calc_btn").click(function () {
+				//convert these strings to array of chars
+				let name1 = validate_data($("#name1").val(), $("#err1"));
+				let name2 = validate_data($("#name2").val(), $("#err2"));
+				calc_names(name1, name2);
+			})
+		});
+	</script>
+</body>
+</html>
