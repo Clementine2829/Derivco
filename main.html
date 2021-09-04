@@ -28,6 +28,7 @@
 			calc_names();
 		})
 	});
+	var FINAL_RESULTS = 0;
 	function calc_names(){
 		//convert these strings to array of chars
 		let name1 = validate_data($("#name1").val(), $("#err1")); 
@@ -40,7 +41,7 @@
 		let text = ("matches").split("");
 		let arr_names = (name1 + "," + text + "," + name2).toLowerCase().split(",");
 		let arr_numbers = [];
-		console.log(arr_names);
+		//console.log(arr_names);
 		for(let i = 0; i < arr_names.length; i++){
 			let current = arr_names[i];
 			let temp_count = 1;
@@ -55,25 +56,52 @@
 			arr_numbers.splice(arr_numbers.length, 0,temp_count); //add to the array
 			//console.log("Arr: " + arr_names + ' \tN: ' + arr_numbers + '\n');
 		}
-		let result = parseInt(calc_numbers(arr_numbers));
+		calc_numbers(arr_numbers);
+		console.log(FINAL_RESULTS);
+		let result = FINAL_RESULTS;
+		console.log(typeof(result));
 		if(result >= 80) result = $("#name1").val() + " matches " + $("#name2").val() + " " + result + "%, good match";
 		else result = $("#name1").val() + " matches " + $("#name2").val() + " " + result + "%";
 		$("#result1").html(result);
 	}
 	function calc_numbers(arr){
-		arr = [9,6];
-		//arr = [2,2,2,1,1,1,1,1,1,1,2];
-		//arr = [2,2,2,1,1,1,1,1,1,1];
+		/*let my_arr = arr;
+		for(let i = 0; i < my_arr.length; i++){
+			if(my_arr[i].toString().length == 2){
+				let temp_arr = my_arr[i].toString().split("");
+				for(let j = 0; j < temp_arr.length; j++){
+					my_arr.splice((i+j), 1, temp_arr[j]);
+				}
+				my_arr.push(arr[i]);
+			}else continue;
+
+
+
+		}
+		arr = my_arr;*/
+
+		let array = arr.toString().split(',');
+		//console.log(array);	
+		for(let i = 0; i < array.length; i++){
+			//console.log(array[i]);	
+			arr[i] = parseInt(array[i]);
+			//console.log(typeof(arr[i]) + '\t');
+		}
+		//console.log("Arra: " + array);	
+		//arr = new array(array);
+
+
+		console.log(arr);
 		if(arr.length < 3){
-			let temp_result = 0;
+			let temp_result = '';
 			for(let j = 0; j < arr.length; j++)
-				temp_result += arr[j] + ''; 
-			return temp_result; 
+				temp_result += '' + parseInt(arr[j]);
+				//console.log(temp_result); 
+			FINAL_RESULTS = temp_result; 
+			return; 
 		} 	
-			
 		let arr_type = ((arr.length % 2) == 0) ? "even" : "odd"; //check if is even or odd
 		let new_arr = [];
-		console.log(arr);
 
 		if(arr_type == "even"){
 			//break array in half and swap the other haldd then add them then create another array to store newly created numbers 
@@ -82,6 +110,16 @@
 			let temp_arr_2 = arr.splice(0, arr_len).reverse();
 			for(let i = 0; i < arr_len; i++){
 				let temp = temp_arr_1[i] + temp_arr_2[i];
+
+				//console.log("temp even: " + temp);
+				if(temp > 9){
+					let new_temp = temp.toString().split("");
+					temp = new_temp[0];
+					if(new_temp[1] != "undefined")
+						temp += ', ' + new_temp[1];
+
+				}
+
 				new_arr.splice(i, 0, temp);
 			}
 			//console.log(temp_arr_1 + "\n" + temp_arr_2);
@@ -91,14 +129,35 @@
 			let temp_arr_2 = arr.splice(0, (arr_len + 1)).reverse();
 			for(let i = 0; i < temp_arr_2.length; i++){
 				let temp = temp_arr_1[i] + temp_arr_2[i];
+
+
+				//console.log("temp here is : " + temp);
+				if(temp > 9){
+					let new_temp = temp.toString().split("");
+					temp = new_temp[0];
+					if(new_temp[1] != "undefined")
+						temp += ',' + new_temp[1];
+
+					//console.log("temp odd: " + temp);
+				}
+
+				//console.log("but here, temp is : " + temp + " and value=" + temp_arr_2[i]);
 				new_arr.splice(i, 0, temp);
 				if(i == (temp_arr_2.length - 1)){
-					new_arr.splice((i + 1), 0, temp_arr_1[i]);
+					if(temp_arr_2.length == 1){
+						//the length of the whole array is 3, and when break it leng is 1 then the last value in the array must be included
+						new_arr.splice((1), 0, temp_arr_1[ ( i + 1 )]);
+					}else{
+						new_arr.splice((i + 1), 0, temp_arr_1[i]);
+					}
 				}
+				//console.log("New arr: " + new_arr);
+
 			}
 			//console.log(temp_arr_1 + "\n" + temp_arr_2);
 		}
-		console.log(new_arr);
+		//console.log(new_arr);
+		calc_numbers(new_arr);
 	}
 	function validate_data(text, err){
 		let pattern = /^[a-zA-Z0-9]+$/;
