@@ -23,8 +23,10 @@
 			</p>
 		</div>
 		<div>
+			<p id="loading"></p>
 			<input type="file" name="inputfile" id="inputfile">	<br>
 			<pre id="output"></pre>
+
 		</div>
 	</div>
 
@@ -36,7 +38,7 @@
 			fr.onload = function(){
 				document.getElementById('output').textContent = fr.result;
 				people = fr.result.split('\n');
-				console.log(people);
+				//console.log(people);
 				sort_names(people);
 			}
 			fr.readAsText(this.files[0]);
@@ -49,18 +51,19 @@
 				//the expected string will start with a number then a full stop then the name of the person their gender, like below 
 				//1.Kimberly, f
 				//hence i am reading from the 3rd char not from start
-				let current_person = arr[i].substring(2).split(",");
+				let current_person = arr[i].substring(2).split(", ");
 				let name = current_person[0];
 				let gender = current_person[1];
-				console.log("person: " + name + " sex: " + gender);
-				if(gender == "m"){
+				console.log("\nperson: " + name + " sex: " + gender);
+	
+				if(gender == "m\r"){
 					male.splice(i, 0, name);
-				}else if(gender == "f"){
+				}else if(gender == "f\r"){
 					female.splice(i, 0, name);
 				}
 			}
+			console.log("male: " + male + "\nFemale:" + female)
 			compare_names(male, female);
-			console.log(male + "\n" + female);
 		}
 		function compare_names(male, female){
 			let len = male.length;
@@ -70,14 +73,35 @@
 				let name2 = female[j];
 				calc_names(name1, name2);			
 				//the function above store the results in the global var FINAL_RESULTS  
-				let results = {
+				console.log(name1 + " matches "+ name2);
+				const results = {
 					Name1: name1,
 					Name2: name2,
 					Score: FINAL_RESULTS 
 				};
 				TEXT_OUTPUT.splice(j, 0, results); 
 			}
-			bubble_sort_text_output();
+			//bubble_sort_text_output();
+			let data = "";
+			for(let j = 0; j < TEXT_OUTPUT.length; j++){
+				data += TEXT_OUTPUT[j].Name1 + '\smatches\s' + TEXT_OUTPUT[j].Name2 + '\sScore:' + TEXT_OUTPUT[j].Score + '%<br>';
+			}
+			data = data.substring(0, data.length-4).split('<br>') + '\n';
+			//send data to server 
+			let url = '/upload.html?data=' + data;
+			console.log(url);
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+				if (this.readyState > 0 || this.readyState < 4){
+					$("#loading").html("Loading, please wait");
+				}
+				if (this.readyState == 4 && this.status == 200) {
+					$("#loading").html(this.responseText);
+				}
+			}
+			xhttp.open("POST", url, true);
+			xhttp.send();	
+
 		}
 		function bubble_sort_text_output(){
 			let len = TEXT_OUTPUT.length;
@@ -101,7 +125,7 @@
 					}
 				}
 			}while(checked);
-			console.log(TEXT_OUTPUT);
+
 		}
 	</script>
 </body>
