@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -16,7 +16,7 @@
 	<div id="container">
 		<div>
 			<h2>Graduate Assessment: Good Match</h2>
-			<h5>Main program 1 with no file upload</h5>
+			<h5>Main program 2 with file upload</h5>
 			<p>
 				<a href="main1.html">Main 1</a> |
 				<a href="main2.html">Main 2</a>
@@ -36,7 +36,7 @@
 			let people = [];
 			var fr = new FileReader();
 			fr.onload = function(){
-				document.getElementById('output').textContent = fr.result;
+				//document.getElementById('output').textContent = fr.result;
 				people = fr.result.split('\n');
 				//console.log(people);
 				sort_names(people);
@@ -50,7 +50,7 @@
 			for(let i = 0; i < arr.length; i++){
 				//the expected string will start with a number then a full stop then the name of the person their gender, like below 
 				//1.Kimberly, f
-				//hence i am reading from the 3rd char not from start
+				//hence i am reading from the 3rd char not from zero
 				let current_person = arr[i].substring(2).split(", ");
 				let name = current_person[0];
 				let gender = current_person[1];
@@ -81,7 +81,6 @@
 				};
 				TEXT_OUTPUT.splice(j, 0, results); 
 			}
-			//bubble_sort_text_output();
 			let data = "";
 			for(let j = 0; j < TEXT_OUTPUT.length; j++){
 				data += TEXT_OUTPUT[j].Name1 + '\smatches\s' + TEXT_OUTPUT[j].Name2 + '\sScore:' + TEXT_OUTPUT[j].Score + '%<br>';
@@ -101,31 +100,6 @@
 			}
 			xhttp.open("POST", url, true);
 			xhttp.send();	
-
-		}
-		function bubble_sort_text_output(){
-			let len = TEXT_OUTPUT.length;
-			let checked;
-			do{
-				checked == false;
-				for(let i = 0; i < len; i++){
-
-					if(TEXT_OUTPUT[i].Score > TEXT_OUTPUT[i + 1].Score){
-						let temp = TEXT_OUTPUT[i];
-						TEXT_OUTPUT[i] = TEXT_OUTPUT[i+1];
-						TEXT_OUTPUT[i+1] = temp;
-						checked = true;
-					}else if(TEXT_OUTPUT[i].Score == TEXT_OUTPUT[i + 1].Score){
-						if(TEXT_OUTPUT[i].Name1 > TEXT_OUTPUT[i + 1].Name1){
-							let temp = TEXT_OUTPUT[i];
-							TEXT_OUTPUT[i] = TEXT_OUTPUT[i+1];
-							TEXT_OUTPUT[i+1] = temp;
-							checked = true;
-						}
-					}
-				}
-			}while(checked);
-
 		}
 	</script>
 </body>

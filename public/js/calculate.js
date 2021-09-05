@@ -1,8 +1,8 @@
 	var FINAL_RESULTS = 0;
 	/**
 	*	Calculate the match test
-	*	@name1 The first name to compare
-	*	@name2 the second name to compare with
+	*	 name1 The first name to compare
+	*	 name2 the second name to compare with
 	*/
 	function calc_names(name1, name2){
 		if(name1 == "" || name2 == "") return;
