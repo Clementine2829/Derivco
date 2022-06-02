@@ -21,3 +21,7 @@ If the percentage is more than 80%, so for example if the output was 82% the out
 
 ### Below is a screenshot of the web app ###
 ![image](https://user-images.githubusercontent.com/79464757/171632866-b996f04e-b425-4c11-be3d-bb0fe66deaad.png)
+
+
+### To clone the app you can do the following ###
+- git clone https://github.com/Clementine2829/Derivco
