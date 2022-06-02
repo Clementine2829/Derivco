@@ -19,3 +19,5 @@ The output then is read like **'John matches Sherly 60%'**
 If the percentage is more than 80%, so for example if the output was 82% the output should read
 **'John matches Sherly 81%, good match'**
 
+### Below is a screenshot of the web app ###
+![image](https://user-images.githubusercontent.com/79464757/171632866-b996f04e-b425-4c11-be3d-bb0fe66deaad.png)
