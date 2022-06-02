@@ -1,4 +1,4 @@
-##This is a match percentage app between two people's names using Node.Js##
+## This is a match percentage app between two people's names using Node.Js ##
 
 The sentence to be processed will read as {name1} matches {name2}, for example **'John matches Sherly'** 
 
